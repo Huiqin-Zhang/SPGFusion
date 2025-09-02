@@ -2,6 +2,7 @@
 import os
 import torch
 from torch.utils.data.dataset import Dataset
+from PIL import Image
 import torchvision
 import torchvision.transforms.functional as TF
 import numpy as np
@@ -63,10 +64,19 @@ class Fusion_dataset(Dataset):
         ir_path = self.filepath_ir[index]
         
         image_vis = Image.open(vis_path).convert('RGB')
-        image_vis = TF.to_tensor(image_vis).unsqueeze(0)
+        image_ir  = Image.open(ir_path).convert('RGB')
         
-        image_ir = Image.open(ir_path).convert('RGB')
-        image_ir = TF.to_tensor(image_ir).unsqueeze(0)
+        w_vi, h_vi = image_vis.size  # (width, height)
+        w_ir, h_ir = image_ir.size
+        new_w = max(16, (w_vi // 16) * 16)
+        new_h = max(16, (h_vi // 16) * 16)
+        if (w_vi != new_w) or (h_vi != new_h):
+            image_vis = image_vis.resize((new_w, new_h), resample=Image.BICUBIC)
+        if (w_ir != new_w) or (h_ir != new_h):
+            image_ir = image_ir.resize((new_w, new_h), resample=Image.BICUBIC)
+        
+        image_vis = TF.to_tensor(image_vis).unsqueeze(0)  # [1, 3, H, W]
+        image_ir  = TF.to_tensor(image_ir).unsqueeze(0)   # [1, 3, H, W]
             
         if self.split=='train':
             vis_ir = torch.cat([image_vis, image_ir],dim=1)
