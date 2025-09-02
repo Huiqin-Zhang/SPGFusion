@@ -11,8 +11,12 @@
  - [ ] python 3.9.0
 
 ## To Test/Train
-1. Downloading the pre-trained checkpoint from [best_model_1.pth](https://drive.google.com/drive/folders/1oPuq89ovz5Ue8DsxeBGbW0ZjI6kTDzGC?usp=drive_link) and putting it in **CHECKPOINT/best_model_1.pth**.
-2. Downloading the pre-trained CLIP's checkpoint from [open_clip_pytorch_model.bin](https://drive.google.com/drive/folders/1Bh7YVFYid9z8GT9O2wfxillvO-J2H-4E?usp=drive_link) and putting it in **model/ViT-B-16-laion2B/open_clip_pytorch_model.bin**.
+1. Note that you must pay attention to the CLIP version when installing the environment. Please use：
+```
+pip install open-clip-torch==2.24.0
+```
+2. Downloading the pre-trained checkpoint from [best_model_1.pth](https://drive.google.com/drive/folders/1oPuq89ovz5Ue8DsxeBGbW0ZjI6kTDzGC?usp=drive_link) and putting it in **CHECKPOINT/best_model_1.pth**.
+3. Downloading the pre-trained CLIP's checkpoint from [open_clip_pytorch_model.bin](https://drive.google.com/drive/folders/1Bh7YVFYid9z8GT9O2wfxillvO-J2H-4E?usp=drive_link) and putting it in **model/ViT-B-16-laion2B/open_clip_pytorch_model.bin**.
 
 ## If this work is helpful to you, please cite it as：
 ```
